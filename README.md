@@ -29,6 +29,70 @@ See [docs/DASHBOARD-INDEX.md](docs/DASHBOARD-INDEX.md) for the full spec index a
 
 See [docs/TECH-STACK.md](docs/TECH-STACK.md) for full details and install commands.
 
+## Prerequisites
+
+- **Node.js** 18.18 or newer (20 LTS recommended) — [nodejs.org](https://nodejs.org/)
+- **npm** (comes with Node)
+
+Check versions:
+
+```bash
+node -v   # should be v18.18+ or v20+
+npm -v
+```
+
+If you use **[nvm](https://github.com/nvm-sh/nvm)**, run `nvm use` in this directory — **`.nvmrc`** pins Node **20** to match typical local/Vercel setups.
+
+If you use **Homebrew** on macOS, tooling for this repo is tracked in **`Brewfile`**:
+
+```bash
+brew bundle install
+```
+
+This installs the repo CLI dependencies (`node`, `gh`) and helps keep your local environment consistent.
+
+This is a **Node.js / Next.js** project. Dependencies are declared in **`package.json`** and locked with **`package-lock.json`** (not a Python `requirements.txt`).
+
+## Installation
+
+Clone the repository, install dependencies, and start the dev server:
+
+```bash
+git clone https://github.com/octr-hassanimran/OCTR-Demo.git
+cd OCTR-Demo
+npm ci          # clean install from lockfile (preferred for CI / reproducible builds)
+# or: npm install
+```
+
+### Environment variables
+
+```bash
+cp .env.example .env.local
+```
+
+Edit `.env.local` only when you add integrations that need keys. The demo runs without any env vars.
+
+### Scripts
+
+| Command | Description |
+|--------|-------------|
+| `npm run dev` | Dev server at [http://localhost:3000](http://localhost:3000) |
+| `npm run build` | Production build (same as Vercel) |
+| `npm run start` | Run production build locally (`npm run build` first) |
+| `npm run lint` | ESLint |
+| `npm run deploy:preview` | `npx vercel` — preview URL |
+| `npm run deploy` | `npx vercel --prod` — production (CLI must be linked) |
+
+### Cursor: Vercel coding agent plugin (optional)
+
+Adds Vercel-focused context and slash commands in Cursor. From the project directory (requires Node/npm on your machine):
+
+```bash
+npx plugins add vercel/vercel-plugin
+```
+
+Or in Cursor: **`/add-plugin vercel`**. See [Vercel docs: Agent resources](https://vercel.com/docs/agent-resources/vercel-plugin).
+
 ## Project Structure
 
 ```
@@ -71,20 +135,24 @@ See [docs/TECH-STACK.md](docs/TECH-STACK.md) for full details and install comman
 │   ├── data/                      # Synthetic data seed files
 │   └── lib/                       # Utilities, types, adapters
 ├── public/                        # Static assets
+├── Brewfile                       # Homebrew tooling manifest (node, gh)
+├── .env.example                   # Template for `.env.local` (optional keys)
+├── .nvmrc                         # Node version for nvm (optional)
 ├── package.json
+├── package-lock.json
 ├── tailwind.config.ts
 ├── next.config.mjs
 └── tsconfig.json
 ```
 
-## Getting Started
+## Getting Started (quick)
 
 ```bash
 npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+Open [http://localhost:3000](http://localhost:3000). For a full setup, see **Installation** above.
 
 ## Deployment
 

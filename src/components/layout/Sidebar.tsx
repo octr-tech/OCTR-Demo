@@ -10,7 +10,6 @@ import {
   Zap,
   TrendingUp,
   Wrench,
-  Building2,
   Sparkles,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -31,14 +30,24 @@ export function Sidebar() {
   return (
     <aside className="w-[220px] h-screen flex-shrink-0 bg-[var(--surface)] border-r border-[var(--border)] flex flex-col">
       <div className="h-14 flex items-center gap-2.5 px-5 border-b border-[var(--border)]">
-        <Image
-          src="/assets/octr-logo-full.png"
-          alt="OCTR logo"
-          width={120}
-          height={28}
-          className="h-7 w-auto"
-          priority
-        />
+        <div className="h-8 w-8 rounded-md bg-[rgba(82,183,136,0.14)] ring-1 ring-[var(--border)] flex items-center justify-center">
+          <Image
+            src="/assets/octr-logo-mark.png"
+            alt="OCTR mark"
+            width={20}
+            height={20}
+            className="h-5 w-5 object-contain brightness-0 invert opacity-90"
+            priority
+          />
+        </div>
+        <div className="min-w-0 leading-tight">
+          <div className="text-[14px] font-semibold tracking-[0.08em] text-[var(--text)]">
+            OCTR
+          </div>
+          <div className="text-[10px] text-[var(--text-faint)] -mt-0.5">
+            Energy Platform
+          </div>
+        </div>
       </div>
 
       <nav className="flex-1 py-3 px-2.5 space-y-0.5">
