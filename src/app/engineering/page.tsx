@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { Suspense, useEffect, useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { FDDRegister } from "@/components/db6/fdd-register";
@@ -15,7 +15,7 @@ const tabs: { id: Tab; label: string }[] = [
   { id: "ddc", label: "DDC Deep Dive" },
 ];
 
-export default function EngineeringPage() {
+function EngineeringPageContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const initialTab = (searchParams.get("tab") as Tab) ?? "fdd";
@@ -83,5 +83,27 @@ export default function EngineeringPage() {
 
       <div className="px-8 py-6">{CurrentTab}</div>
     </div>
+  );
+}
+
+function EngineeringFallback() {
+  return (
+    <div className="min-h-screen px-8 pt-7">
+      <div className="h-7 w-64 rounded bg-[var(--border)]/60 animate-pulse" />
+      <div className="mt-4 h-4 w-96 max-w-full rounded bg-[var(--border)]/40 animate-pulse" />
+      <div className="mt-8 flex gap-8 border-b border-[var(--border)] pb-3">
+        <div className="h-4 w-24 rounded bg-[var(--border)]/50 animate-pulse" />
+        <div className="h-4 w-28 rounded bg-[var(--border)]/50 animate-pulse" />
+        <div className="h-4 w-28 rounded bg-[var(--border)]/50 animate-pulse" />
+      </div>
+    </div>
+  );
+}
+
+export default function EngineeringPage() {
+  return (
+    <Suspense fallback={<EngineeringFallback />}>
+      <EngineeringPageContent />
+    </Suspense>
   );
 }
