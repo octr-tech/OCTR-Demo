@@ -1,0 +1,22 @@
+{
+  "background": "#0A0F0D",
+  "surface": "#111B16",
+  "surfaceHover": "#1A2B22",
+  "border": "rgba(255,255,255,0.06)",
+  "borderStrong": "rgba(255,255,255,0.14)",
+  "primary": "#2D6A4F",
+  "primaryStrong": "#1B4332",
+  "primaryBright": "#52B788",
+  "primarySoft": "#40916C",
+  "text": "#E8F5E9",
+  "textMuted": "#A7C4B5",
+  "textFaint": "#6F8578",
+  "danger": "#E57373",
+  "warning": "#F6C344",
+  "info": "#6CB2FF",
+  "gradients": {
+    "hero": "linear-gradient(135deg, rgba(13,31,18,0.92), rgba(45,106,79,0.85))",
+    "card": "linear-gradient(180deg, rgba(17,27,22,0.85), rgba(17,27,22,0.7))",
+    "chart": "linear-gradient(180deg, rgba(82,183,136,0.4) 0%, rgba(82,183,136,0) 100%)"
+  }
+}

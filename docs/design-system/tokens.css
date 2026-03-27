@@ -1,0 +1,83 @@
+/* Design Tokens: Dark Forest / Matcha Theme */
+:root {
+  /* Core palette */
+  --bg: #0a0f0d;
+  --surface: #111b16;
+  --surface-hover: #1a2b22;
+  --border: rgba(255, 255, 255, 0.06);
+  --border-strong: rgba(255, 255, 255, 0.14);
+
+  --primary: #2d6a4f;        /* deep forest green */
+  --primary-strong: #1b4332; /* darker anchor */
+  --primary-bright: #52b788; /* accent / success */
+  --primary-soft: #40916c;   /* glow / gradient mid */
+
+  --text: #e8f5e9;
+  --text-muted: #a7c4b5;
+  --text-faint: #6f8578;
+
+  --danger: #e57373;
+  --warning: #f6c344;
+  --info: #6cb2ff;
+
+  /* Gradients */
+  --gradient-hero: linear-gradient(135deg, rgba(13, 31, 18, 0.92), rgba(45, 106, 79, 0.85));
+  --gradient-card: linear-gradient(180deg, rgba(17, 27, 22, 0.85), rgba(17, 27, 22, 0.7));
+  --gradient-chart: linear-gradient(180deg, rgba(82, 183, 136, 0.4) 0%, rgba(82, 183, 136, 0) 100%);
+
+  /* Shadows / glow */
+  --shadow-soft: 0 10px 40px rgba(0, 0, 0, 0.35);
+  --shadow-glow: 0 0 12px rgba(64, 145, 108, 0.6);
+  --shadow-border: 0 0 0 1px rgba(255, 255, 255, 0.06);
+
+  /* Radii */
+  --radius-sm: 4px;
+  --radius-md: 6px; /* default */
+  --radius-lg: 12px;
+
+  /* Typography */
+  --font-sans: "Plus Jakarta Sans", "Inter", system-ui, -apple-system, sans-serif;
+  --text-xs: 12px;
+  --text-sm: 13px;
+  --text-md: 14px;
+  --text-lg: 16px;
+  --text-xl: 18px;
+  --text-2xl: 20px;
+  --text-3xl: 24px;
+
+  /* Spacing (8pt base) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+
+  /* Transitions */
+  --ease-standard: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --dur-fast: 120ms;
+  --dur-med: 220ms;
+  --dur-slow: 420ms;
+}
+
+.card {
+  background: var(--surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-border), var(--shadow-soft);
+  transition: box-shadow var(--dur-med) var(--ease-standard), transform var(--dur-med) var(--ease-standard), border-color var(--dur-med) var(--ease-standard);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-border), var(--shadow-soft), 0 0 0 1px rgba(82, 183, 136, 0.4), 0 10px 50px rgba(64, 145, 108, 0.25);
+  transform: translateY(-1px);
+}
+
+.chart-area-fill {
+  fill: var(--gradient-chart);
+}
+
+.chart-line-glow {
+  filter: drop-shadow(0 0 6px rgba(82, 183, 136, 0.5));
+}
