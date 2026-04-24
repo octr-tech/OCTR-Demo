@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import type { LucideIcon } from "lucide-react";
 import {
   LayoutDashboard,
   Activity,
@@ -11,18 +12,60 @@ import {
   TrendingUp,
   Wrench,
   Sparkles,
+  BarChart3,
+  Calculator,
+  Paintbrush,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const navItems = [
-  { label: "Executive Summary", href: "/", icon: LayoutDashboard, db: "DB-1" },
-  { label: "Live Operations", href: "/operations", icon: Activity, db: "DB-2" },
-  { label: "Systems Intelligence", href: "/systems", icon: Cpu, db: "DB-3" },
-  { label: "Energy Hub", href: "/energy", icon: Zap, db: "DB-4" },
-  { label: "Optimization", href: "/optimization", icon: TrendingUp, db: "DB-5" },
-  { label: "Engineering", href: "/engineering", icon: Wrench, db: "DB-6" },
-  { label: "Design Lab", href: "/design-lab", icon: Sparkles, db: "Design" },
+type NavItem = { label: string; href: string; icon: LucideIcon; key: string };
+
+const navItems: NavItem[] = [
+  { label: "Executive Summary", href: "/", icon: LayoutDashboard, key: "DB-1" },
+  { label: "Live Operations", href: "/operations", icon: Activity, key: "DB-2" },
+  { label: "Systems Intelligence", href: "/systems", icon: Cpu, key: "DB-3" },
+  { label: "Energy Hub", href: "/energy", icon: Zap, key: "DB-4" },
+  { label: "Optimization", href: "/optimization", icon: TrendingUp, key: "DB-5" },
+  { label: "Engineering", href: "/engineering", icon: Wrench, key: "DB-6" },
+  { label: "Design Lab", href: "/design-lab", icon: Sparkles, key: "Design" },
 ];
+
+const dashboardNavItems: NavItem[] = [
+  { label: "Energy Metering", href: "/metering", icon: BarChart3, key: "dash-metering" },
+  {
+    label: "Optimisation Algos",
+    href: "/optimisation-algos",
+    icon: Calculator,
+    key: "dash-optimisation-algos",
+  },
+  { label: "Visuals Lab 1", href: "/visuals-lab-1", icon: Paintbrush, key: "dash-visuals-lab-1" },
+];
+
+function NavLink({ item, pathname }: { item: NavItem; pathname: string }) {
+  const isActive =
+    item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
+  const Icon = item.icon;
+
+  return (
+    <Link
+      href={item.href}
+      className={cn(
+        "group relative flex items-center gap-2.5 px-3 py-2 rounded-md text-[13px] transition-all duration-200 border border-transparent overflow-hidden",
+        isActive
+          ? "text-[var(--primary-bright)] font-semibold bg-[rgba(82,183,136,0.08)] border-[rgba(82,183,136,0.35)] shadow-[0_0_0_1px_rgba(82,183,136,0.22),0_12px_28px_rgba(64,145,108,0.16)] before:absolute before:inset-[-20%] before:bg-[radial-gradient(circle_at_20%_20%,rgba(82,183,136,0.22),transparent_55%)] before:opacity-80 before:pointer-events-none"
+          : "text-[var(--text-muted)] hover:text-[var(--text)] hover:bg-[var(--surface-hover)] hover:border-[rgba(82,183,136,0.25)] hover:shadow-[0_0_0_1px_rgba(82,183,136,0.18),0_10px_22px_rgba(64,145,108,0.12)]"
+      )}
+    >
+      <Icon
+        className={cn(
+          "w-[16px] h-[16px] flex-shrink-0 transition-transform duration-200",
+          isActive ? "scale-105 drop-shadow-[0_0_6px_rgba(82,183,136,0.55)]" : "group-hover:translate-x-[1px]"
+        )}
+      />
+      <span className="truncate relative z-[1]">{item.label}</span>
+    </Link>
+  );
+}
 
 export function Sidebar() {
   const pathname = usePathname();
@@ -50,35 +93,20 @@ export function Sidebar() {
         </div>
       </div>
 
-      <nav className="flex-1 py-3 px-2.5 space-y-0.5">
-        {navItems.map((item) => {
-          const isActive =
-            item.href === "/"
-              ? pathname === "/"
-              : pathname.startsWith(item.href);
-          const Icon = item.icon;
-
-          return (
-            <Link
-              key={item.db}
-              href={item.href}
-              className={cn(
-                "group relative flex items-center gap-2.5 px-3 py-2 rounded-md text-[13px] transition-all duration-200 border border-transparent overflow-hidden",
-                isActive
-                  ? "text-[var(--primary-bright)] font-semibold bg-[rgba(82,183,136,0.08)] border-[rgba(82,183,136,0.35)] shadow-[0_0_0_1px_rgba(82,183,136,0.22),0_12px_28px_rgba(64,145,108,0.16)] before:absolute before:inset-[-20%] before:bg-[radial-gradient(circle_at_20%_20%,rgba(82,183,136,0.22),transparent_55%)] before:opacity-80 before:pointer-events-none"
-                  : "text-[var(--text-muted)] hover:text-[var(--text)] hover:bg-[var(--surface-hover)] hover:border-[rgba(82,183,136,0.25)] hover:shadow-[0_0_0_1px_rgba(82,183,136,0.18),0_10px_22px_rgba(64,145,108,0.12)]"
-              )}
-            >
-              <Icon
-                className={cn(
-                  "w-[16px] h-[16px] flex-shrink-0 transition-transform duration-200",
-                  isActive ? "scale-105 drop-shadow-[0_0_6px_rgba(82,183,136,0.55)]" : "group-hover:translate-x-[1px]"
-                )}
-              />
-              <span className="truncate relative z-[1]">{item.label}</span>
-            </Link>
-          );
-        })}
+      <nav className="flex-1 min-h-0 py-3 px-2.5 overflow-y-auto flex flex-col gap-0.5">
+        {navItems.map((item) => (
+          <NavLink key={item.key} item={item} pathname={pathname} />
+        ))}
+        <div
+          className="my-2 mx-1 border-t border-[var(--border)] shrink-0"
+          role="presentation"
+        />
+        <div className="px-3 pt-1 pb-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-[var(--text-faint)] shrink-0">
+          Dashboards
+        </div>
+        {dashboardNavItems.map((item) => (
+          <NavLink key={item.key} item={item} pathname={pathname} />
+        ))}
       </nav>
 
       <div className="px-4 py-3 border-t border-[var(--border)]">

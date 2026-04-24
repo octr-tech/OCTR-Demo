@@ -19,12 +19,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={jakarta.variable}>
-      <body className="font-sans">
-        <div className="flex h-screen min-h-0 overflow-hidden">
+    <html lang="en" className={`${jakarta.variable} h-dvh max-h-dvh overflow-hidden`}>
+      <body className="font-sans m-0 h-dvh max-h-dvh min-h-0 overflow-hidden antialiased">
+        <div className="flex h-full min-h-0 w-full overflow-hidden">
           <Sidebar />
-          {/* min-h-0 + min-w-0: flex default min-size is content; without this, main cannot shrink and scroll breaks */}
-          <main className="min-h-0 min-w-0 flex-1 overflow-y-auto">{children}</main>
+          {/*
+            Column flex so routes can use flex-1 + min-h-0 (e.g. full-height iframe) without growing
+            the document past the viewport.
+          */}
+          <main className="flex min-h-0 min-w-0 flex-1 flex-col overflow-y-auto overflow-x-hidden">
+            {children}
+          </main>
         </div>
       </body>
     </html>

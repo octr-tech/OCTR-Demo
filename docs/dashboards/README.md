@@ -45,10 +45,10 @@ This folder is the dashboard registry for:
 
 - **Energy Metering (G-Valley)**
   - Route: `/metering`
-  - Source: currently standalone artifact only
+  - Source: `apps/web/src/app/metering` (embeds `public/dashboards/energy-metering/` from `exports/energy-metering/standalone/`)
   - Docs: `docs/dashboards/energy-metering/`
   - Export: `exports/energy-metering/standalone/`
-  - Status: `standalone-only`
+  - Status: `active`
 
 - **Optimisation Algos (G-Valley)**
   - Route: `/optimisation-algos`
