@@ -85,7 +85,7 @@ export function GValleyPlantSchematic() {
   );
 
   return (
-    <div className="space-y-4">
+    <div className="min-w-0 space-y-4">
       <div className="flex flex-wrap items-center gap-3">
         <span className="font-mono text-[10px] text-foreground-faint uppercase tracking-[0.16em]">
           Season
@@ -110,7 +110,7 @@ export function GValleyPlantSchematic() {
         <p className="text-[11px] text-foreground-muted max-w-xl leading-relaxed">{seasonNote}</p>
       </div>
 
-      <SchematicCanvasShell>
+      <SchematicCanvasShell className="min-w-0">
         <SchematicLegend />
         <GValleyPlantHero3d
           season={season}

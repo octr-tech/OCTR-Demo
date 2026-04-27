@@ -10,6 +10,8 @@ const tabs = [
   { label: "Strategy Scorecard", href: "/optimization/scorecard" },
   { label: "Analytics & Trends", href: "/optimization/analytics" },
   { label: "M&V Baseline", href: "/optimization/mv" },
+  /** AHU schematic, plant topology, and five interactive strategy strips live on this route (separate layout). */
+  { label: "G Valley demos", href: "/optimisation-algos" },
 ];
 
 export default function OptimizationLayout({
@@ -37,7 +39,10 @@ export default function OptimizationLayout({
         <div className="px-8 pt-4">
           <div className="flex items-center gap-1 border-b border-[var(--border)]">
             {tabs.map((tab) => {
-              const active = pathname === tab.href;
+              const active =
+                tab.href === "/optimisation-algos"
+                  ? pathname === "/optimisation-algos"
+                  : pathname === tab.href;
               return (
                 <Link
                   key={tab.href}

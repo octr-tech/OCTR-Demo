@@ -110,8 +110,14 @@ function PlantFlowInner({
       nodesFocusable={false}
       elementsSelectable={false}
       autoPanOnNodeFocus={false}
-      panOnScroll
-      zoomOnScroll
+      /**
+       * Let the page scroll normally.
+       * This dashboard is a narrative page (multiple sections), so capturing wheel scrolling
+       * for pan/zoom makes it feel like content below the canvas is "missing".
+       */
+      panOnScroll={false}
+      zoomOnScroll={false}
+      preventScrolling={false}
       zoomOnDoubleClick={false}
       minZoom={0.32}
       maxZoom={1.85}
@@ -168,7 +174,19 @@ function PlantFlowInner({
 
 export function GValleyPlantFlowCanvas(props: Props) {
   return (
-    <div className="g-valley-flow h-[min(560px,70vh)] min-h-[420px] w-full rounded-b-lg [&_.react-flow\_\_attribution]:hidden">
+    <div
+      className="g-valley-flow h-[min(560px,70vh)] min-h-[420px] w-full rounded-b-lg overscroll-contain touch-pan-y [&_.react-flow\_\_attribution]:hidden"
+      /**
+       * Extra safety: ensure scroll gestures continue to scroll the page.
+       * Without this, some devices/browsers make it feel like content below is "missing".
+       */
+      onWheelCapture={(e) => {
+        e.stopPropagation();
+      }}
+      onTouchMoveCapture={(e) => {
+        e.stopPropagation();
+      }}
+    >
       <ReactFlowProvider>
         <PlantFlowInner {...props} />
       </ReactFlowProvider>

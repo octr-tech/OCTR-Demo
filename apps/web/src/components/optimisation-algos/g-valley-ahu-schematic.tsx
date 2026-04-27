@@ -61,10 +61,10 @@ export function GValleyAhuSchematic() {
   const mEa = `url(#${rawId}-arr-ea)`;
 
   return (
-    <div className="grid grid-cols-1 gap-5 lg:grid-cols-[1fr_280px]">
-      <SchematicCanvasShell className="overflow-hidden">
+    <div className="grid min-w-0 grid-cols-1 gap-5 lg:grid-cols-[minmax(0,1fr)_280px]">
+      <SchematicCanvasShell className="min-w-0 overflow-hidden">
         <SchematicLegend />
-        <div className="p-3 md:p-4">
+        <div className="min-w-0 p-3 md:p-4">
           <div className="mb-3 flex flex-wrap items-baseline justify-between gap-2 border-b border-white/[0.06] pb-2">
             <div>
               <h3 className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-foreground">
@@ -78,11 +78,12 @@ export function GValleyAhuSchematic() {
             <span className="font-mono text-[10px] text-[var(--primary-bright)]">MODE: AUTO / CLG</span>
           </div>
 
-          <figure className="mx-auto w-full max-w-[920px]" aria-label="AHU-19 style airside schematic">
-            <div className="aspect-[920/438] w-full min-h-[220px]">
+          <figure className="mx-auto w-full min-w-0 max-w-[920px]" aria-label="AHU-19 style airside schematic">
               <svg
                 viewBox="0 0 920 438"
-                className="h-full w-full drop-shadow-[0_4px_24px_rgba(0,0,0,0.35)]"
+                xmlns="http://www.w3.org/2000/svg"
+                className="block h-auto w-full min-h-[200px] min-w-0 max-w-full drop-shadow-[0_4px_24px_rgba(0,0,0,0.35)]"
+                preserveAspectRatio="xMidYMid meet"
                 role="img"
                 aria-labelledby={`${rawId}-ahu-title`}
               >
@@ -371,12 +372,11 @@ export function GValleyAhuSchematic() {
                   {satEstC.toFixed(1)} °C
                 </text>
               </svg>
-            </div>
           </figure>
         </div>
       </SchematicCanvasShell>
 
-      <div className="space-y-4 text-[12px]">
+      <div className="min-w-0 space-y-4 text-[12px] lg:max-w-[280px]">
         <div>
           <div className="mb-2 font-mono text-[10px] uppercase tracking-[0.14em] text-foreground-faint">
             Outdoor air intake

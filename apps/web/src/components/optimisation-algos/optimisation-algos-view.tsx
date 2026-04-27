@@ -36,9 +36,12 @@ const demoByNumber: Record<number, ReactNode> = {
 
 export function OptimisationAlgosView() {
   const inScopeCount = strategies.filter((s) => s.inScopeGValley).length;
+  const totalStrategies = strategies.length;
+  const heroCount = heroStrategies.length;
+  const excludedCount = excludedForGValley.length;
 
   return (
-    <div className="px-8 pb-16 pt-6 space-y-10 max-w-[1700px] mx-auto">
+    <div className="mx-auto min-w-0 max-w-[1700px] space-y-10 px-8 pb-16 pt-6">
       <header className="space-y-2">
         <div className="flex flex-wrap items-baseline gap-3">
           <h1 className="text-xl font-semibold text-[var(--text)]">G Valley · Optimisation Algos</h1>
@@ -55,7 +58,56 @@ export function OptimisationAlgosView() {
           {floorModel.officeFloors} occupied floors + {floorModel.basementFloors.length} basement levels ·{" "}
           {floorModel.ahuCount} AHUs · geothermal heating {floorModel.geothermalHeatingFloors}
         </p>
+        <p className="text-[12px] text-[var(--text-muted)] max-w-3xl leading-relaxed">
+          The plant schematic, AHU diagram, full 20-strategy list, and five interactive strips are below — scroll past
+          the summary card. From{" "}
+          <span className="text-[var(--text)] font-medium">Optimization (DB-5)</span>, use the{" "}
+          <span className="text-[var(--text)] font-medium">G Valley demos</span> tab; or open{" "}
+          <span className="text-[var(--text)] font-medium">Optimisation Algos</span> in the sidebar (dashboard tools).
+        </p>
       </header>
+
+      <SectionCard
+        title="Strategy coverage (at a glance)"
+        description="Quick counts so the narrative stays grounded in the full catalogue."
+        badge="Summary"
+      >
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="rounded-md border border-white/[0.06] bg-black/10 px-4 py-3">
+            <div className="text-[10px] uppercase tracking-wider text-foreground-faint">Total strategies</div>
+            <div className="mt-1 text-[18px] font-semibold text-foreground tabular-nums">{totalStrategies}</div>
+          </div>
+          <div className="rounded-md border border-white/[0.06] bg-black/10 px-4 py-3">
+            <div className="text-[10px] uppercase tracking-wider text-foreground-faint">In scope (G Valley)</div>
+            <div className="mt-1 text-[18px] font-semibold text-[var(--primary-bright)] tabular-nums">
+              {inScopeCount}
+            </div>
+          </div>
+          <div className="rounded-md border border-white/[0.06] bg-black/10 px-4 py-3">
+            <div className="text-[10px] uppercase tracking-wider text-foreground-faint">Interactive demos</div>
+            <div className="mt-1 text-[18px] font-semibold text-foreground tabular-nums">{heroCount}</div>
+          </div>
+          <div className="rounded-md border border-white/[0.06] bg-black/10 px-4 py-3">
+            <div className="text-[10px] uppercase tracking-wider text-foreground-faint">Out of scope</div>
+            <div className="mt-1 text-[18px] font-semibold text-foreground tabular-nums">{excludedCount}</div>
+          </div>
+        </div>
+
+        <div className="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-md border border-white/[0.06] bg-black/10 px-4 py-3">
+          <div>
+            <div className="text-[11px] text-foreground font-medium">AHU visualisation</div>
+            <div className="text-[11px] text-foreground-muted">
+              For the full AHU performance view (timelines, duct pressure, economy cycle), open Systems → Air.
+            </div>
+          </div>
+          <Link
+            href="/systems/air"
+            className="text-[12px] text-[var(--primary-bright)] hover:underline font-medium"
+          >
+            Open AHU dashboard
+          </Link>
+        </div>
+      </SectionCard>
 
       <SectionCard
         title="Water-side plant schematic"
@@ -71,6 +123,41 @@ export function OptimisationAlgosView() {
         badge={`${floorModel.ahuCount} AHUs on site`}
       >
         <GValleyAhuSchematic />
+      </SectionCard>
+
+      <SectionCard
+        title="Full strategy list (20)"
+        description="Everything in the catalogue, with what’s included in the G Valley scope flagged."
+        badge="Registry"
+      >
+        <ul className="divide-y divide-white/[0.06] border border-white/[0.06] rounded-md overflow-hidden">
+          {strategies.map((s) => (
+            <li
+              key={s.guideNumber}
+              className="px-3 py-2.5 flex flex-col gap-1 bg-black/10 sm:flex-row sm:items-center sm:justify-between"
+            >
+              <div className="flex items-center gap-2">
+                <span className="text-[10px] font-mono text-foreground-faint tabular-nums">#{s.guideNumber}</span>
+                <span className="text-[13px] text-foreground font-medium">{s.title}</span>
+                {s.hero ? (
+                  <span className="text-[10px] rounded px-1.5 py-0.5 border border-[rgba(101,212,161,0.25)] bg-[rgba(101,212,161,0.12)] text-[var(--primary-bright)]">
+                    demo
+                  </span>
+                ) : null}
+                {s.inScopeGValley ? (
+                  <span className="text-[10px] rounded px-1.5 py-0.5 border border-white/[0.08] bg-white/[0.04] text-foreground-muted">
+                    in scope
+                  </span>
+                ) : (
+                  <span className="text-[10px] rounded px-1.5 py-0.5 border border-[rgba(229,115,115,0.18)] bg-[rgba(229,115,115,0.08)] text-[#f2b5b5]">
+                    out of scope
+                  </span>
+                )}
+              </div>
+              <p className="text-[11px] text-foreground-muted sm:max-w-[52%] sm:text-right">{s.shortLine}</p>
+            </li>
+          ))}
+        </ul>
       </SectionCard>
 
       <div className="space-y-6">

@@ -9,7 +9,7 @@ export type SectionCardProps = {
 
 export function SectionCard({ title, description, children, badge }: SectionCardProps) {
   return (
-    <section className="bg-surface border border-white/[0.06] rounded-lg p-5 md:p-6 shadow-[0_10px_40px_rgba(0,0,0,0.35)] transition-all duration-200 hover:border-[rgba(82,183,136,0.18)] hover:shadow-[0_0_0_1px_rgba(82,183,136,0.12),0_14px_44px_rgba(0,0,0,0.38)]">
+    <section className="min-w-0 bg-surface border border-white/[0.06] rounded-lg p-5 md:p-6 shadow-[0_10px_40px_rgba(0,0,0,0.35)] transition-all duration-200 hover:border-[rgba(82,183,136,0.18)] hover:shadow-[0_0_0_1px_rgba(82,183,136,0.12),0_14px_44px_rgba(0,0,0,0.38)]">
       <div className="flex flex-wrap items-center gap-3 mb-4">
         <div>
           <div className="flex items-center gap-2">

@@ -31,7 +31,7 @@ export function DashboardChrome({
   maxWidth?: string;
 }) {
   return (
-    <div className="relative min-h-screen overflow-hidden" style={dashboardTheme}>
+    <div className="relative min-h-screen overflow-x-hidden overflow-y-visible" style={dashboardTheme}>
       <div className="absolute inset-0 bg-[#070a0f]" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.04),transparent_32%),radial-gradient(circle_at_80%_0%,rgba(101,212,161,0.12),transparent_36%),radial-gradient(circle_at_40%_80%,rgba(108,178,255,0.08),transparent_34%)] opacity-70" />
       <div
